@@ -1,0 +1,29 @@
+# Rust
+target/
+Cargo.lock
+
+# Node
+node_modules/
+dist/
+.output/
+
+# Tauri
+src-tauri/target/
+src-tauri/Cargo.lock
+
+# Environment
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
