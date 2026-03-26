@@ -46,10 +46,11 @@ Traditional todo apps put 90% of the logic in the frontend. This design inverts 
 ## Quick start
 
 1. Fork this repo and clone it
-2. Copy `.env.example` to `.env` (defaults work if Ollama is installed)
-3. Open the project in Claude Code
-4. Read `docs/phases/phase-01.md` for your first task
-5. Start building — Claude Code in Learning mode will guide you
+2. `pnpm install`
+3. Copy `.env.example` to `.env` (defaults work if Ollama is installed)
+4. Open the project in Claude Code
+5. `pnpm tauri dev` — verify the app window opens
+6. Read `docs/phases/phase-01.md` for your first task: exploring the scaffold
 
 ## Project structure
 
@@ -62,15 +63,20 @@ Traditional todo apps put 90% of the logic in the frontend. This design inverts 
 │   ├── settings.json      ← Learning output style + hooks
 │   └── skills/
 │       ├── checkpoint/    ← End-of-session reflection
-│       └── verify/        ← Run clippy + tests + checks
+│       ├── verify/        ← Run clippy + tests + checks
+│       ├── preflight/     ← Check prerequisites are installed
+│       ├── project-overview/ ← Orientation: what you're building + why
+│       └── docs/          ← Look up validated documentation links
 ├── .env.example           ← LLM provider config
+├── src/                   ← Svelte 5 frontend (pre-scaffolded)
+├── src-tauri/             ← Rust backend (pre-scaffolded)
 └── docs/
     ├── architecture.md    ← System architecture diagram
     ├── llm-setup.md       ← Ollama installation guide
     └── phases/            ← Per-phase briefing docs (phase-01 through phase-10)
 ```
 
-No `src/` or `src-tauri/` — you create the Tauri project yourself in Phase 1. That's the first lesson.
+The Tauri app is pre-scaffolded with a working demo command. Phase 1 is about exploring and understanding the structure — not creating it from scratch.
 
 ## How it works
 

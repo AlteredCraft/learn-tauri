@@ -61,6 +61,15 @@ Specifically:
 
 ## After the Check
 
-If everything passes (or only Ollama is missing), tell the learner they're ready and suggest starting Phase 1.
+If everything passes (or only Ollama is missing), tell the learner they're ready:
+
+```
+Ready to go! Run these to get started:
+
+  pnpm install
+  pnpm tauri dev
+
+Then read docs/phases/phase-01.md for your first task — exploring the scaffold and understanding how the pieces connect.
+```
 
 If anything critical is missing, list exactly what to install and offer to re-check after they've done it.

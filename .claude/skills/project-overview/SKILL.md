@@ -60,8 +60,9 @@ Briefly explain the three layers (don't over-explain — they'll experience them
 ### 6. Close with Next Steps
 
 After the overview, suggest:
-- If the project isn't scaffolded yet (no `src-tauri/` directory): "Ready to start? I'll run a preflight check on your environment and then we'll scaffold the Tauri project."
-- If Phase 1 is done: "You're past the scaffold — check `learning-goals.md` to see which phase you're on, or ask me what's next."
+- If dependencies aren't installed yet (no `node_modules/`): "Ready to start? I'll run a preflight check on your environment, then you can `pnpm install && pnpm tauri dev` to launch the app."
+- If the app is running but Phase 1 goals are unchecked: "The scaffold is ready — Phase 1 is about exploring the project structure and understanding how Tauri connects Rust to the webview. Start with `docs/phases/phase-01.md`."
+- If Phase 1 is done: "Check `learning-goals.md` to see which phase you're on, or ask me what's next."
 
 ## Tone
 

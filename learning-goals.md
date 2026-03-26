@@ -73,11 +73,12 @@ These are core Rust concepts that a web developer needs to internalize. They are
 These are Tauri, Svelte, and LLM integration concepts exercised through specific features. Each maps directly to a build phase.
 
 ### A1: Tauri App Scaffolding & Lifecycle
-- [ ] Can create a Tauri 2 project from scratch
+- [ ] Can navigate and explain every file in a Tauri 2 project
 - [ ] Understand the Tauri app lifecycle (setup, run, exit)
 - [ ] Understand the relationship between the Rust backend and the webview frontend
 - [ ] Can configure app metadata, window properties, and permissions
-- **Exercised in**: Phase 1 — project scaffold, `setup()` hook for DB initialization
+- [ ] Can trace an IPC call from frontend `invoke()` through to a Rust command and back
+- **Exercised in**: Phase 1 — explore the pre-built scaffold, verify dev workflow, understand the IPC bridge
 - **Notes**:
 
 ### A2: SQLite Integration
@@ -161,7 +162,7 @@ This sequence front-loads foundational Rust learning through data modeling and p
 
 | Phase | What to build | Primary learning goals |
 |---|---|---|
-| 1 | Tauri 2 + Svelte 5 scaffold, empty window, dev workflow | A1, F6 |
+| 1 | Explore scaffold, run dev workflow, understand Tauri architecture | A1, F6 |
 | 2 | Data model in Rust — structs, enums, unit tests (no UI) | F1, F2, F3, F5, F7 |
 | 3 | SQLite persistence — schema, CRUD functions, integration tests | A2, F4 |
 | 4 | Tauri commands — wire DB to frontend, temporary CRUD controls | A3, A4 |

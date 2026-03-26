@@ -56,7 +56,7 @@ ASCII diagrams and tables make concepts stick faster than paragraphs of text. Us
 If a concept has a spatial or relational dimension, reach for a diagram before reaching for a paragraph.
 
 ### Proactive Environment Checks
-When the learner is starting Phase 1 (no `src-tauri/` directory exists yet), run `/preflight` automatically before scaffolding. Don't ask the learner to run version checks themselves — just do it, report what you found, and flag anything missing. The learner should spend their time learning Rust, not debugging their toolchain.
+When the learner first opens the project and hasn't run `pnpm install` yet (no `node_modules/` directory), run `/preflight` automatically before anything else. Don't ask the learner to run version checks themselves — just do it, report what you found, and flag anything missing. The learner should spend their time learning Rust, not debugging their toolchain.
 
 ### Build Phase Awareness
 Check the **Suggested Build Order** table in `learning-goals.md` to know which phase the project is in. Use this to:
