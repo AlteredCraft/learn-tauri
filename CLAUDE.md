@@ -30,6 +30,14 @@ When sharing Insights, connect them to the goal being exercised:
 - Name the goal ID explicitly: "This is **F4: Error Handling** — notice how..."
 - Draw comparisons to Python/JS/TypeScript equivalents the learner already knows
 - When a Rust concept has no JS/TS equivalent (ownership, lifetimes, borrowing), slow down and explain *why* it exists, not just *how* it works
+- **Always include a documentation link** for the concept being explained — point the learner to the authoritative source so they can go deeper on their own. Use the links in the Documentation References section below.
+
+### After Completing Work
+The learner is here to learn — assume they have questions after every piece of work you complete. After finishing a task, explaining a concept, or handing off a `TODO(human)`:
+
+- Ask if anything needs further explanation ("Anything about [concept] you'd like me to dig into?")
+- Suggest what to read next in the docs if the topic has depth beyond what you covered
+- If you assigned a `TODO(human)`, check in after the learner completes it — ask what tripped them up or what clicked
 
 ### Calibration
 - The learner is likely an **experienced web developer** who is a **Rust beginner**
@@ -42,6 +50,41 @@ Check the **Suggested Build Order** table in `learning-goals.md` to know which p
 - Focus `TODO(human)` on goals listed for the current phase
 - Avoid introducing concepts from later phases prematurely
 - When a later-phase concept is unavoidable, acknowledge it: "We'll cover this properly in Phase N, but for now just know that..."
+
+## Documentation References
+
+When explaining concepts, link to the relevant section of these docs. Don't just name the docs — link to the specific page or chapter.
+
+### Rust
+- **The Rust Book**: https://doc.rust-lang.org/stable/book/
+  - Ownership: [ch04](https://doc.rust-lang.org/stable/book/ch04-00-understanding-ownership.html)
+  - Structs: [ch05](https://doc.rust-lang.org/stable/book/ch05-00-structs.html)
+  - Enums & Pattern Matching: [ch06](https://doc.rust-lang.org/stable/book/ch06-00-enums.html)
+  - Modules: [ch07](https://doc.rust-lang.org/stable/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)
+  - Error Handling: [ch09](https://doc.rust-lang.org/stable/book/ch09-00-error-handling.html)
+  - Traits: [ch10.2](https://doc.rust-lang.org/stable/book/ch10-02-traits.html)
+  - Testing: [ch11](https://doc.rust-lang.org/stable/book/ch11-00-testing.html)
+  - Async: [ch17](https://doc.rust-lang.org/stable/book/ch17-00-async-await.html)
+- **Std library**: https://doc.rust-lang.org/stable/std/
+- **Rust by Example**: https://doc.rust-lang.org/rust-by-example/
+
+### Tauri 2
+- **Tauri docs**: https://v2.tauri.app/
+- **Commands**: https://v2.tauri.app/develop/calling-rust/
+- **Events**: https://v2.tauri.app/develop/calling-rust/#events
+- **State management**: https://v2.tauri.app/develop/state-management/
+- **App lifecycle**: https://v2.tauri.app/develop/configuration/
+
+### Svelte 5
+- **Svelte docs**: https://svelte.dev/docs/svelte/overview
+- **Runes ($state, $derived, $effect)**: https://svelte.dev/docs/svelte/$state
+- **SvelteKit**: https://svelte.dev/docs/kit/introduction
+
+### SQLite (rusqlite)
+- **rusqlite docs**: https://docs.rs/rusqlite/latest/rusqlite/
+
+### HTTP (reqwest)
+- **reqwest docs**: https://docs.rs/reqwest/latest/reqwest/
 
 ## Project Stack
 
