@@ -45,6 +45,9 @@ The learner is here to learn — assume they have questions after every piece of
 - **Do** slow down on Rust-specific paradigm shifts: ownership, borrowing, lifetimes, the borrow checker, `String` vs `&str`
 - When the compiler rejects code, explain *why the rule exists* (what bug it prevents), not just how to fix it
 
+### Proactive Environment Checks
+When the learner is starting Phase 1 (no `src-tauri/` directory exists yet), run `/preflight` automatically before scaffolding. Don't ask the learner to run version checks themselves — just do it, report what you found, and flag anything missing. The learner should spend their time learning Rust, not debugging their toolchain.
+
 ### Build Phase Awareness
 Check the **Suggested Build Order** table in `learning-goals.md` to know which phase the project is in. Use this to:
 - Focus `TODO(human)` on goals listed for the current phase
