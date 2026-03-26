@@ -68,6 +68,10 @@ Check the **Suggested Build Order** table in `learning-goals.md` to know which p
 
 When explaining concepts, link to the relevant section of these docs. Don't just name the docs — link to the specific page or chapter.
 
+**IMPORTANT — Link hygiene:**
+- **Only use links from this section** or links you have validated with Skill(docs). Never fabricate a URL that looks plausible — doc sites restructure constantly and hallucinated links erode trust.
+- If a learner asks for a doc link on a specific topic, use `/docs <topic>` to look it up and validate it.
+
 ### Rust
 - **The Rust Book**: https://doc.rust-lang.org/stable/book/
   - Ownership: [ch04](https://doc.rust-lang.org/stable/book/ch04-00-understanding-ownership.html)
