@@ -4,10 +4,11 @@ This document defines the Rust, Tauri, and Svelte learning objectives for the Na
 
 ## How to use this document
 
-- Goals are checked off when you can confidently explain the concept and have working code that demonstrates it
+- Each goal has **evidence** items — concrete, observable things the learner did or explained. Check these off as they happen.
 - The **Exercised in** field maps each goal to the feature/phase where you'll encounter it
-- The **Notes** field is for capturing what clicked, what confused you, and where AI helped or hurt — raw material for reflection
-- Claude Code's Learning mode references this document when deciding what `TODO(human)` items to assign
+- The **Notes** field captures what clicked, what was confusing, and where AI helped or hurt
+- Claude Code's Learning mode references this document when deciding what `TODO(human)` items to assign and what questions to ask
+- The agent updates this file during `/checkpoint` — the learner doesn't need to edit it directly
 
 ---
 
@@ -16,54 +17,56 @@ This document defines the Rust, Tauri, and Svelte learning objectives for the Na
 These are core Rust concepts that a web developer needs to internalize. They aren't features — they're the mental model shifts that make everything else make sense.
 
 ### F1: Ownership & Borrowing
-- [ ] Can explain why Rust has ownership and what problem it solves
-- [ ] Comfortable passing data to functions without the compiler fighting you
-- [ ] Understand the difference between moving, borrowing (`&`), and mutable borrowing (`&mut`)
-- **Exercised in**: Phase 2 — passing todo structs, chat messages, and database results between functions; Phase 7 — LLM client passing request/response data
+- [ ] Wrote a function that takes ownership of a value and used it without compiler errors
+- [ ] Fixed a borrow checker error by changing `self` to `&self` or `&mut self` and explained why
+- [ ] Explained in own words what problem ownership solves (not just "the compiler said so")
+- [ ] Correctly predicted whether a value would need to be borrowed or moved before the compiler told them
+- **Exercised in**: Phase 2 — passing todo structs between functions; Phase 7 — LLM client passing request/response data
 - **Notes**:
 
 ### F2: Structs & Enums as Data Modeling
-- [ ] Can define structs to represent domain objects (no classes, no inheritance)
-- [ ] Can define enums with variants that carry data (algebraic data types)
-- [ ] Understand `impl` blocks for attaching methods
+- [ ] Defined a struct with appropriate field types (choosing between String, Option, Vec, etc.)
+- [ ] Defined an enum where at least one variant carries data
+- [ ] Wrote an `impl` block with at least one method
+- [ ] Explained why Rust uses structs + enums instead of classes + inheritance
 - **Exercised in**: Phase 2 — `Todo` struct, `TodoStatus` enum, `LlmIntent` enum with associated data, `ChatMessage` struct
 - **Notes**:
 
 ### F3: Pattern Matching
-- [ ] Can use `match` on enums, Options, and Results
-- [ ] Comfortable with destructuring in match arms
-- [ ] Understand exhaustiveness checking and why the compiler insists on it
+- [ ] Wrote a `match` that destructures an enum variant to extract its data
+- [ ] Encountered an exhaustiveness error, added the missing arm, and explained why Rust requires it
+- [ ] Used pattern matching on `Option` or `Result` (not just `.unwrap()`)
 - **Exercised in**: Phase 2 — matching `TodoStatus`; Phase 8 — matching `LlmIntent` variants to dispatch the correct database operation
 - **Notes**:
 
 ### F4: Error Handling (Result, Option, ?)
-- [ ] Understand `Result<T, E>` vs exceptions — errors are values, not control flow
-- [ ] Can use the `?` operator to propagate errors
-- [ ] Can define custom error types or use a crate like `anyhow`/`thiserror`
-- [ ] Know when to use `Option` vs `Result`
-- **Exercised in**: Phase 3 — database operations that fail; Phase 7 — LLM API calls that fail, malformed responses; Phase 8 — ambiguous or unparseable LLM output
+- [ ] Wrote a function that returns `Result<T, E>` and used `?` to propagate errors
+- [ ] Handled an error case explicitly (not with `.unwrap()` or `.expect()` in production code)
+- [ ] Chose between `Option` and `Result` for a return type and explained the choice
+- [ ] Explained how `Result` differs from try/catch in JS/Python
+- **Exercised in**: Phase 3 — database operations that fail; Phase 7 — LLM API calls that fail; Phase 8 — unparseable LLM output
 - **Notes**:
 
 ### F5: Traits
-- [ ] Understand traits as Rust's interface mechanism
-- [ ] Can implement standard traits (`Display`, `Debug`, `Serialize`, `Deserialize`)
-- [ ] Understand derive macros and when to use them
-- **Exercised in**: Phase 2 — serde derives on data structs, `Display` for `TodoStatus`; Phase 10 — `LlmProvider` trait for multi-provider support
+- [ ] Added `#[derive(...)]` to a struct and explained what traits were being implemented
+- [ ] Implemented a trait manually (e.g., `Display` for a type)
+- [ ] Defined a custom trait with at least one method (Phase 10)
+- [ ] Explained what traits give you that JS/TS interfaces don't
+- **Exercised in**: Phase 2 — serde derives, `Display` for `TodoStatus`; Phase 10 — `LlmProvider` trait
 - **Notes**:
 
 ### F6: Modules & Crates
-- [ ] Can organize code into modules (`mod`, `pub`, `use`)
-- [ ] Understand the file-system-to-module mapping convention
-- [ ] Can add and use external crates via `Cargo.toml`
-- [ ] Know how to evaluate a crate (docs.rs, crates.io, maintenance status)
-- **Exercised in**: Phase 1 — project structure; ongoing — `db` module, `llm` module, `commands` module, `models` module
+- [ ] Created a new module file and wired it into the project with `mod` and `pub`
+- [ ] Added an external crate to `Cargo.toml` and used it in code
+- [ ] Explained the file-system-to-module mapping (why `mod db;` expects `db.rs` or `db/mod.rs`)
+- **Exercised in**: Phase 1 — project structure; ongoing — `db`, `llm`, `commands`, `models` modules
 - **Notes**:
 
 ### F7: String Handling (String vs &str)
-- [ ] Understand why Rust has two string types and when to use each
-- [ ] Comfortable converting between them without fighting the compiler
-- [ ] Can work with string slicing, formatting, and interpolation
-- **Exercised in**: Everywhere — user input strings, LLM prompts, JSON serialization, database text fields, formatted chat responses
+- [ ] Fixed a type mismatch between `String` and `&str` and explained why both exist
+- [ ] Chose the right string type for a function parameter and explained the choice
+- [ ] Used `format!()` or string interpolation to build a dynamic string
+- **Exercised in**: Everywhere — user input, LLM prompts, JSON serialization, database text, chat responses
 - **Notes**:
 
 ---
@@ -73,85 +76,85 @@ These are core Rust concepts that a web developer needs to internalize. They are
 These are Tauri, Svelte, and LLM integration concepts exercised through specific features. Each maps directly to a build phase.
 
 ### A1: Tauri App Scaffolding & Lifecycle
-- [ ] Can navigate and explain every file in a Tauri 2 project
-- [ ] Understand the Tauri app lifecycle (setup, run, exit)
-- [ ] Understand the relationship between the Rust backend and the webview frontend
-- [ ] Can configure app metadata, window properties, and permissions
-- [ ] Can trace an IPC call from frontend `invoke()` through to a Rust command and back
+- [ ] Traced the `invoke("greet")` call from Svelte through IPC to Rust and back, explaining each step
+- [ ] Explained why `main.rs` and `lib.rs` are separate files
+- [ ] Modified `tauri.conf.json` (e.g., window size, title) and observed the effect
+- [ ] Explained why SvelteKit sets `ssr = false` in a Tauri app
 - **Exercised in**: Phase 1 — explore the pre-built scaffold, verify dev workflow, understand the IPC bridge
 - **Notes**:
 
 ### A2: SQLite Integration
-- [ ] Can set up an embedded SQLite database from Rust
-- [ ] Can define a schema and run migrations
-- [ ] Can perform CRUD operations with parameterized queries
-- [ ] Understand connection management patterns
+- [ ] Wrote a `CREATE TABLE` statement and executed it from Rust
+- [ ] Wrote a parameterized INSERT and SELECT query (not string interpolation)
+- [ ] Wrote a test that uses an in-memory database
+- [ ] Explained why parameterized queries matter (vs. string formatting)
 - **Exercised in**: Phase 3 — todo storage, chat history persistence, schema creation on first launch
 - **Notes**:
 
 ### A3: Tauri Commands (Rust-to-JS Bridge)
-- [ ] Can define Tauri commands that expose Rust functions to the frontend
-- [ ] Can pass structured data (structs/enums) between Rust and JS via serde
-- [ ] Understand command return types and error handling across the bridge
+- [ ] Defined a `#[tauri::command]` function that accepts parameters and returns structured data
+- [ ] Called the command from Svelte with `invoke()` and handled the response
+- [ ] Hit a serialization error across the IPC bridge and fixed it
 - **Exercised in**: Phase 4 — `send_message`, `get_todos`, `get_chat_history` commands
 - **Notes**:
 
 ### A4: Tauri Managed State
-- [ ] Can register and access shared application state in Tauri
-- [ ] Understand how Tauri's state management interacts with Rust's ownership model
-- [ ] Can safely share state between commands
+- [ ] Registered shared state with `app.manage()` and accessed it in a command via `State<T>`
+- [ ] Wrapped state in `Mutex` and explained why concurrent access needs it
+- [ ] Explained the difference between managed state and a global variable
 - **Exercised in**: Phase 4 — DB connection and LLM client config shared across all commands
 - **Notes**:
 
 ### A5: Tauri Events (Backend-to-Frontend Push)
-- [ ] Can emit events from Rust to the frontend
-- [ ] Can listen for events in the JS frontend and update the UI
-- [ ] Understand the event model vs. command model (push vs. pull)
-- **Exercised in**: Phase 6 — `todos-updated` event emitted after any todo mutation, dashboard refreshes reactively
+- [ ] Emitted an event from Rust with `app_handle.emit()`
+- [ ] Listened for the event in Svelte and triggered a UI update
+- [ ] Explained when to use events vs. command return values
+- **Exercised in**: Phase 6 — `todos-updated` event emitted after any todo mutation
 - **Notes**:
 
 ### A6: HTTP Client & Async
-- [ ] Understand Rust's async model (futures, runtimes, tokio)
-- [ ] Can make HTTP requests and handle responses
-- [ ] Can deserialize API responses into Rust structs
-- [ ] Understand async error handling
+- [ ] Made an async HTTP request with `reqwest` and awaited the response
+- [ ] Deserialized a JSON response into a Rust struct
+- [ ] Handled a network error (timeout, connection refused) without panicking
+- [ ] Explained what `.await` does and how Rust async differs from JS async
 - **Exercised in**: Phase 7 — Ollama REST API calls; Phase 10 — OpenAI-compatible API calls
 - **Notes**:
 
 ### A7: Serde & JSON
-- [ ] Can serialize/deserialize Rust structs to/from JSON
-- [ ] Understand serde's derive model and field attributes (`#[serde(rename)]`, `#[serde(default)]`)
-- [ ] Can handle structured LLM responses
+- [ ] Serialized a Rust struct to JSON and deserialized JSON back to a struct
+- [ ] Used a serde attribute (`#[serde(rename)]`, `#[serde(default)]`, etc.) and explained why
+- [ ] Debugged a serde deserialization failure (wrong field name, missing field, wrong type)
 - **Exercised in**: Phase 7 — LLM request/response serialization; Phase 4 — Tauri command data transfer
 - **Notes**:
 
 ### A8: Svelte 5 Reactivity & Runes
-- [ ] Understand Svelte 5 runes (`$state`, `$derived`, `$effect`)
-- [ ] Can build reactive components that update from external data
-- [ ] Can handle user input and form submission
-- **Exercised in**: Phase 5 — chat message list, todo dashboard, message input; Phase 9 — chat history loading, loading states
+- [ ] Used `$state` to create a reactive variable and saw the UI update when it changed
+- [ ] Used `$derived` to compute a value from other state
+- [ ] Used `$effect` for a side effect (e.g., auto-scroll, fetch on mount)
+- [ ] Explained how Svelte 5 runes compare to React hooks or Vue reactivity
+- **Exercised in**: Phase 5 — chat message list, todo dashboard, message input; Phase 9 — chat history, loading states
 - **Notes**:
 
 ### A9: Svelte Component Architecture
-- [ ] Can decompose UI into reusable components
-- [ ] Understand props, events, and slots in Svelte 5
-- [ ] Can style components with scoped CSS
-- **Exercised in**: Phase 5 — ChatMessage, TodoList, ChatInput, Layout components; Phase 9 — polish and refinement
+- [ ] Created at least 3 separate `.svelte` component files
+- [ ] Passed data from a parent to a child component via props
+- [ ] Styled a component with scoped CSS
+- **Exercised in**: Phase 5 — ChatMessage, TodoList, ChatInput, Layout components; Phase 9 — polish
 - **Notes**:
 
 ### A10: Tauri Frontend Integration
-- [ ] Can call Tauri commands from Svelte via `@tauri-apps/api`
-- [ ] Can listen for Tauri events and react to them
-- [ ] Understand the security model (CSP, allowed domains)
-- **Exercised in**: Phase 5 — invoking `send_message`; Phase 6 — listening for `todos-updated`; Phase 5 — calling `get_chat_history` on mount
+- [ ] Called a Tauri command from Svelte and displayed the result
+- [ ] Set up an event listener with `listen()` that updates component state
+- [ ] Explained the difference between `invoke()` (pull) and `listen()` (push)
+- **Exercised in**: Phase 5 — invoking commands; Phase 6 — listening for events
 - **Notes**:
 
 ### A11: LLM Prompt Engineering in Code
-- [ ] Can construct effective system prompts programmatically
-- [ ] Understand structured output formats (JSON mode, schema guidance)
-- [ ] Can handle LLM response parsing failures gracefully
-- [ ] Can iterate on prompts based on observed behavior
-- **Exercised in**: Phase 8 — building the system prompt with todo context, parsing structured responses, fallback handling
+- [ ] Built a system prompt dynamically from application state (not a static string)
+- [ ] Parsed structured JSON from an LLM response into a Rust type
+- [ ] Handled a malformed LLM response without crashing (fallback logic)
+- [ ] Iterated on a prompt after observing incorrect classification and improved it
+- **Exercised in**: Phase 8 — system prompt with todo context, structured output parsing, fallback handling
 - **Notes**:
 
 ---

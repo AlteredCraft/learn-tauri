@@ -52,10 +52,17 @@ Show the build phase table from `learning-goals.md` — 10 phases, each producin
 
 ### 5. How the Learning Framework Works
 
-Briefly explain the three layers (don't over-explain — they'll experience them):
-- **Learning output style**: Claude Code writes scaffolding but leaves `TODO(human)` markers for you to implement. Each marker references a learning goal ID.
-- **SessionStart hook**: Every time you open Claude Code, it shows your current phase and which goals are next.
-- **`/checkpoint` skill**: At the end of a session, run this to reflect on what clicked and what's fuzzy. Your notes are saved for continuity.
+Explain the three layers and how they chain together:
+
+- **Learning output style**: As you work, Claude Code writes scaffolding but leaves `TODO(human)` markers for you to implement yourself. Each marker references a specific learning goal (like F1 or A3), so you always know what concept you're exercising. After you complete one, the agent will ask you to explain your reasoning — working code alone doesn't mean the concept landed.
+- **SessionStart hook**: Every time you open Claude Code, it automatically shows your current build phase and which learning goals are next. You don't need to re-explain where you left off.
+- **`/checkpoint`**: This is the most important habit to build. When you're done for the day or finishing a phase, run `/checkpoint` (or just say "I'm done for today" — the agent will run it for you). It:
+  1. Maps your git changes to learning goals
+  2. Asks you targeted questions about what you built — not "how do you feel" but "why did you use `&mut self` here?"
+  3. Checks off evidence items in `learning-goals.md` based on what you demonstrated
+  4. Records notes for continuity across sessions
+
+  This is where learning gets captured. If you skip it, the goals don't get updated, and the framework can't track whether concepts actually stuck.
 
 ### 6. Close with Next Steps
 
